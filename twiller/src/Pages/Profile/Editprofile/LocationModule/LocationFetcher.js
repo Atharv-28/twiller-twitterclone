@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./locationFetcher.css";
 
 const LocationFetcher = ({onLocationObtained}) => {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
@@ -33,8 +34,8 @@ const LocationFetcher = ({onLocationObtained}) => {
   };
 
   return (
-    <div>
-      <button type="button" onClick={getLocation}>Obtain Location</button>
+    <div className="location-fetcher">
+      <button className="location-fetch-button" type="button" onClick={getLocation}>Obtain Location</button>
     </div>
   );
 };

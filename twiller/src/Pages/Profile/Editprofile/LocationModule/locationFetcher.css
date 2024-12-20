@@ -1,0 +1,12 @@
+.location-fetch-button{
+    border: none;
+    font-size: 0.9rem;
+    padding: 10px;
+    border-radius: 3px;
+    color: gray;
+    border-bottom: 0.5px solid black;
+}
+
+.location-fetcher{
+    margin-bottom: 10px;
+}
