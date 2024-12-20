@@ -72,6 +72,8 @@ const Editprofile = ({ user, loggedinuser }) => {
   const [website, setwebsite] = useState("");
   const [open, setopen] = useState(false);
   const [dob, setdob] = useState("");  
+  const [coordinates, setCoordinates] = useState({ latitude: null, longitude: null });
+
 
   const handlesave = () => {
     const editinfo = {
@@ -80,6 +82,8 @@ const Editprofile = ({ user, loggedinuser }) => {
       location,
       website,
       dob,
+      latitude: coordinates.latitude,
+      longitude: coordinates.longitude,
     };
     fetch(`http://localhost:5000/userupdate/${user?.email}`, {
       method: "PATCH",
@@ -93,6 +97,12 @@ const Editprofile = ({ user, loggedinuser }) => {
         console.log("done", data);
       });
   };
+
+  const handleLocationObtained = ({ address, latitude, longitude }) => {
+    setlocation(address);
+    setCoordinates({ latitude, longitude });
+  };
+
   return (
     <div>
       <button
@@ -148,7 +158,7 @@ const Editprofile = ({ user, loggedinuser }) => {
               }
               value={location}
             />
-            <LocationFetcher onLocationObtained={setlocation} />
+            <LocationFetcher onLocationObtained={handleLocationObtained} />
             <TextField
               className="text-field"
               fullWidth

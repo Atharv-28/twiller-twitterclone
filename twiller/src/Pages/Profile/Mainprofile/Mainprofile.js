@@ -8,6 +8,7 @@ import LockResetIcon from "@mui/icons-material/LockReset";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import AddLinkIcon from "@mui/icons-material/AddLink";
 import Editprofile from "../Editprofile/Editprofile";
+import WeatherFetching from "../Editprofile/WeatherFetch/WeatherFetching";
 import axios from "axios";
 import useLoggedinuser from "../../../hooks/useLoggedinuser";
 
@@ -184,9 +185,14 @@ const Mainprofile = ({ user }) => {
                   {loggedinuser[0]?.bio ? <p>{loggedinuser[0].bio}</p> : ""}
                   <div className="locationAndLink">
                     {loggedinuser[0]?.location ? (
-                      <p className="suvInfo">
-                        <MyLocationIcon /> {loggedinuser[0].location}
-                      </p>
+                      <div>
+                        <p className="subInfo">
+                          <MyLocationIcon /> {loggedinuser[0].location}
+                        </p>
+                        <p>
+                          <WeatherFetching user={loggedinuser} />
+                        </p>
+                      </div>
                     ) : (
                       ""
                     )}

@@ -21,7 +21,7 @@ const LocationFetcher = ({onLocationObtained}) => {
           setAddress(addressDetails.state_district+", "+addressDetails.state+", "+addressDetails.country);
           if (onLocationObtained) {
             console.log("Location obtained: ", address);
-            onLocationObtained(address);
+            onLocationObtained({ address, latitude, longitude });
           }
         },
         (error) => {
