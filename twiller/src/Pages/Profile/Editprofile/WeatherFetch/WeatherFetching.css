@@ -1,0 +1,14 @@
+.weather-fetchings{
+    width: 100%;
+}
+.weather-fetching{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.ico-txt{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
