@@ -5,6 +5,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import LocationFetcher from "./LocationModule/LocationFetcher";
 import "./Editprofile.css";
 
 const style = {
@@ -70,7 +71,8 @@ const Editprofile = ({ user, loggedinuser }) => {
   const [location, setlocation] = useState("");
   const [website, setwebsite] = useState("");
   const [open, setopen] = useState(false);
-  const [dob, setdob] = useState("");
+  const [dob, setdob] = useState("");  
+
   const handlesave = () => {
     const editinfo = {
       name,
@@ -123,6 +125,7 @@ const Editprofile = ({ user, loggedinuser }) => {
               variant="filled"
               onChange={(e) => setname(e.target.value)}
               deafultValue={loggedinuser[0]?.name ? loggedinuser[0].name : ""}
+              value={loggedinuser[0]?.name}
             />
             <TextField
               className="text-field"
@@ -143,7 +146,9 @@ const Editprofile = ({ user, loggedinuser }) => {
               deafultValue={
                 loggedinuser[0]?.location ? loggedinuser[0].location : ""
               }
+              value={location}
             />
+            <LocationFetcher onLocationObtained={setlocation} />
             <TextField
               className="text-field"
               fullWidth

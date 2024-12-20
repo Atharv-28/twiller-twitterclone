@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const LocationFetcher = () => {
+const LocationFetcher = ({onLocationObtained}) => {
   const [location, setLocation] = useState({ latitude: null, longitude: null });
   const [address, setAddress] = useState("");
 
@@ -17,9 +17,11 @@ const LocationFetcher = () => {
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
           );
           const addressDetails = geocodeResponse.data.address;
-          // setAddress(address);
-          console.log(addressDetails);
           setAddress(addressDetails.state_district+", "+addressDetails.state+", "+addressDetails.country);
+          if (onLocationObtained) {
+            console.log("Location obtained: ", address);
+            onLocationObtained(address);
+          }
         },
         (error) => {
           console.error("Error obtaining location", error);
@@ -32,20 +34,7 @@ const LocationFetcher = () => {
 
   return (
     <div>
-      <button onClick={getLocation}>Obtain Location</button>
-      {address && (
-        <div>
-          <h4>Current Location:</h4>
-          <p>{address}</p>
-        </div>
-      )}
-      {location.latitude && location.longitude && (
-        <div>
-          <h4>Coordinates:</h4>
-          <p>Latitude: {location.latitude}</p>
-          <p>Longitude: {location.longitude}</p>
-        </div>
-      )}
+      <button type="button" onClick={getLocation}>Obtain Location</button>
     </div>
   );
 };

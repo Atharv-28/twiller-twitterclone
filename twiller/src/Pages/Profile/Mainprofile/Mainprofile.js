@@ -9,7 +9,6 @@ import MyLocationIcon from "@mui/icons-material/MyLocation";
 import AddLinkIcon from "@mui/icons-material/AddLink";
 import Editprofile from "../Editprofile/Editprofile";
 import axios from "axios";
-import LocationFetcher from "./LocationModule/LocationFetcher";
 import useLoggedinuser from "../../../hooks/useLoggedinuser";
 
 const Mainprofile = ({ user }) => {
@@ -200,7 +199,6 @@ const Mainprofile = ({ user }) => {
                     )}
                   </div>
                 </div>
-                <LocationFetcher />
                 <h4 className="tweetsText">Tweets</h4>
                 <hr />
               </div>
