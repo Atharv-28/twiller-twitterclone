@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
 const WeatherFetching = ({ user }) => {
   const [weather, setWeather] = useState(null);
@@ -15,31 +17,38 @@ const WeatherFetching = ({ user }) => {
 
   useEffect(() => {
     if (latitude && longitude) {
-      // Fetch weather data using weatherapi.com API
-      const fetchWeather = async () => {
-        try {
-          const weatherResponse = await axios.get(
-            `https://api.weatherapi.com/v1/current.json?key=06dbdad212c54edb9e8111325242012&q=${latitude},${longitude}`
-          );
-          setWeather(weatherResponse.data);
-        } catch (error) {
+      axios.get(`https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=${latitude},${longitude}`)
+        .then(response => {
+          setWeather(response.data);
+        })
+        .catch(error => {
           console.error("Error fetching weather data:", error);
-        }
-      };
-      fetchWeather();
+        });
     }
   }, [latitude, longitude]);
 
   return (
     <div>
-      {weather && (
-        <div>
-          <h4>Weather Conditions:</h4>
-          <img src={weather.current.condition.icon} alt="Weather icon" />
-
-          <p>{weather.current.condition.text}</p>
-          <p>Temperature: {weather.current.temp_c}°C</p>
-        </div>
+      {latitude && longitude && (
+        <MapContainer center={[latitude, longitude]} zoom={13} style={{ height: "300px", width: "100%" }}>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          />
+          <Marker position={[latitude, longitude]}>
+            <Popup>
+              {weather ? (
+                <div>
+                  <h3>{weather.location.name}</h3>
+                  <p>{weather.current.condition.text}</p>
+                  <p>{weather.current.temp_c}°C</p>
+                </div>
+              ) : (
+                <p>Loading weather...</p>
+              )}
+            </Popup>
+          </Marker>
+        </MapContainer>
       )}
     </div>
   );
