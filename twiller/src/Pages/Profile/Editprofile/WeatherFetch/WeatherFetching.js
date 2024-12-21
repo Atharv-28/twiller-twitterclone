@@ -81,11 +81,11 @@ const WeatherFetching = ({ user }) => {
           <MapContainer
             center={[latitude, longitude]}
             zoom={5}
-            style={{ height: "200px", width: "55%" }}
+            style={{ height: "250px", width: "60%" }}
           >
             <TileLayer
               url={`https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=d6b7e8e0dd379fa0ead80d9cb65c9a46`}
-              attribution='&copy; <a href="https://openweathermap.org/">OpenWeatherMap</a>'
+              
             />
             <HeatmapLayer data={heatmapData} />
             {markers.map((marker, index) => (
