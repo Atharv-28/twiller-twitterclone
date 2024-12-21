@@ -37,9 +37,7 @@ const Feed = () => {
          setpost(data);
       })
       
-  },[post]);
-   console.log(post)
-   
+  },[post]);   
     //setpost(data);
   return (
     <div className="feed">

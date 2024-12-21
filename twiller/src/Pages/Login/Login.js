@@ -60,13 +60,25 @@ const Login = () => {
                   Log In
                 </button>
               </div>
+              <div className="forgot-password">
+                <Link
+                  to="/forgotpassword"
+                  style={{
+                    textDecoration: "none",
+                    color: "var(--twitter-color)",
+                    fontWeight: "600",
+                  }}
+                >
+                  Forgot password?
+                </Link>
+              </div>
             </form>
             <hr />
-            <div>
+            <div className="forgot-password">
               <GoogleButton className="g-btn" type="light" onClick={hanglegooglesignin}/>
             </div>
           </div>
-          <div>
+          <div className="forgot-password">
             Don't have an account
             <Link
               to="/signup"

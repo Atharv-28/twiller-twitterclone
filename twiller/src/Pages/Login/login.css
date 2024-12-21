@@ -12,9 +12,6 @@
     margin: 10px;
     /* margin-left: -50px; */
     align-content: center;
-
-
-
 }
 
 .form-box {
@@ -113,6 +110,12 @@ input {
     outline: none;
     margin-bottom: 20px;
     margin-top: 15px;
+}
+
+.forgot-password{
+    display: flex;
+    width: 75%;
+    justify-content: center;
 }
 
 .g-btn {
