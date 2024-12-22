@@ -87,11 +87,9 @@ async function run() {
       }
     });
 
-    app.post('/api/reset-password', async (req, res) => {
-      const { emailOrPhone, newPassword } = req.body;
-      const hashedPassword = crypto.createHash('sha256').update(newPassword).digest('hex');
-      await usercollection.updateOne({ email: emailOrPhone }, { $set: { password: hashedPassword } });
-      res.json({ success: true, message: 'Password reset successfully' });
+    app.get('/api/generate-password', (req, res) => {
+      const password = generateRandomPassword();
+      res.json({ password });
     });
     
     app.post("/register", async (req, res) => {

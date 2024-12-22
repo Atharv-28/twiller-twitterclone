@@ -8,10 +8,12 @@
 
 .form-container {
     flex: 1;
-    padding: 50px;
+    padding: 0 0 0 50px;
     margin: 10px;
     /* margin-left: -50px; */
     align-content: center;
+    justify-content: center;
+    border: 2px solid red;
 }
 
 .form-box {
@@ -33,13 +35,13 @@
 
 .heading,
 h1 {
-    font-size: 50px
+    font-size: 50px;
+    border: 2px solid red;
 }
 
 .heading1,
 h3 {
     font-size: 35px;
-
     justify-content: end
 }
 
@@ -132,6 +134,9 @@ input {
 
 .google-button {
     margin-top: 5%;
+    width: 75%;
+    display: flex;
+    justify-content: center;
 }
 
 .g-btn>div,
