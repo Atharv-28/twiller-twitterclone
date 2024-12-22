@@ -40,17 +40,16 @@ async function run() {
     app.post('/api/forgot-password', async (req, res) => {
       const { emailOrPhone } = req.body;
       const currentDate = new Date().toDateString();
-/*
+
       if (requestLimit[emailOrPhone] === currentDate) {
         return res.status(429).json({ message: "You can only request a password reset once per day." });
       }
-*/
+
       requestLimit[emailOrPhone] = currentDate;
       const otp = generateOtp();
       otpStore[emailOrPhone] = otp;
       
 
-      // Send OTP via email (or SMS)
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
