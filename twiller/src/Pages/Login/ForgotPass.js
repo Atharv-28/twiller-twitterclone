@@ -1,29 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
-import app from '../../context/firbase';
-import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+import axios from "axios";
+import twitterimg from "../../image/twitter.jpeg";
+import app from "../../context/firbase";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import "./login.css";
 
 const ForgotPass = () => {
-  const [emailOrPhone, setEmailOrPhone] = useState('');
-  const [otp, setOtp] = useState('');
-  const [message, setMessage] = useState('');
+  const [emailOrPhone, setEmailOrPhone] = useState("");
+  const [otp, setOtp] = useState("");
+  const [message, setMessage] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const navigate = useNavigate();
   const auth = getAuth(app);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/forgot-password', { emailOrPhone });
+      const response = await axios.post(
+        "http://localhost:5000/api/forgot-password",
+        { emailOrPhone }
+      );
       setMessage(response.data.message);
       setOtpSent(true);
     } catch (error) {
       if (error.response && error.response.data) {
         setMessage(error.response.data.message);
       } else {
-        setMessage('An error occurred. Please try again.');
+        setMessage("An error occurred. Please try again.");
       }
     }
   };
@@ -31,9 +35,15 @@ const ForgotPass = () => {
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/verify-otp', { emailOrPhone, otp });
+      const response = await axios.post(
+        "http://localhost:5000/api/verify-otp",
+        { emailOrPhone, otp }
+      );
       if (response.data.success) {
-        await sendPasswordResetEmail(auth, emailOrPhone) 
+        await sendPasswordResetEmail(auth, emailOrPhone);
+        setMessage(
+          "OTP verified. Please check your email for the password reset link."
+        );
       } else {
         setMessage(response.data.message);
       }
@@ -41,38 +51,45 @@ const ForgotPass = () => {
       if (error.response && error.response.data) {
         setMessage(error.response.data.message);
       } else {
-        setMessage('An error occurred. Please try again.');
+        setMessage("An error occurred. Please try again.");
       }
     }
   };
 
   return (
-    <div>
-      <h2>Forgot Password</h2>
-      {!otpSent ? (
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Enter your email or phone number"
-            value={emailOrPhone}
-            onChange={(e) => setEmailOrPhone(e.target.value)}
-            required
-          />
-          <button type="submit">Submit</button>
-        </form>
-      ) : (
-        <form onSubmit={handleVerifyOtp}>
-          <input
-            type="text"
-            placeholder="Enter the OTP sent to your email"
-            value={otp}
-            onChange={(e) => setOtp(e.target.value)}
-            required
-          />
-          <button type="submit">Verify OTP</button>
-        </form>
-      )}
-      {message && <p>{message}</p>}
+    <div className="login-container">
+      <div className="image-container">
+        <img className="image" src={twitterimg} alt="twitterimage" />
+      </div>
+      <div className="form-container">
+        <h2 className="heading">Forgot Password</h2>
+        {!otpSent ? (
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              className="email"
+              placeholder="Enter your email or phone number"
+              value={emailOrPhone}
+              onChange={(e) => setEmailOrPhone(e.target.value)}
+              required
+            />
+            <button type="submit" className="btn">Submit</button>
+          </form>
+        ) : (
+          <form onSubmit={handleVerifyOtp}>
+            <input
+              type="text"
+              className="email"
+              placeholder="Enter the OTP sent to your email"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
+              required
+            />
+            <button className="btn" type="submit">Verify OTP</button>
+          </form>
+        )}
+        {message && <p className="msg">{message}!!</p>}
+      </div>
     </div>
   );
 };

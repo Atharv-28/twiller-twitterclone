@@ -92,7 +92,10 @@ input {
 
 }
 
-
+.msg{
+    text-align: center;
+    width: 75%;
+}
 
 
 .btn-login {
