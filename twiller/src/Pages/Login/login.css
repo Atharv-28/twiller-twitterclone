@@ -13,7 +13,6 @@
     /* margin-left: -50px; */
     align-content: center;
     justify-content: center;
-    border: 2px solid red;
 }
 
 .form-box {
@@ -36,7 +35,6 @@
 .heading,
 h1 {
     font-size: 50px;
-    border: 2px solid red;
 }
 
 .heading1,
@@ -121,6 +119,24 @@ input {
     display: flex;
     width: 75%;
     justify-content: center;
+}
+
+.password-container{
+    display: flex;
+    height: 65px;
+    gap: 10px;
+    align-items:end;
+}
+
+.show-div{
+    height: 60%;
+    background-color: transparent;
+    border: none;
+    border-radius: 30px;
+}
+
+.show{
+    height: 100%;
 }
 
 .g-btn {

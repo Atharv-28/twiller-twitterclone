@@ -20,15 +20,15 @@ const Signup = () => {
 
   const generatePassword = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/generate-password');
+      const response = await axios.get(
+        "http://localhost:5000/api/generate-password"
+      );
       setpassword(response.data.password);
       console.log(response.data.password);
-      
     } catch (error) {
-      console.error('Error generating password:', error);
+      console.error("Error generating password:", error);
     }
   };
-
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -113,13 +113,13 @@ const Signup = () => {
                 value={password}
                 onChange={(e) => setpassword(e.target.value)}
               />
-              <button type="button" onClick={generatePassword}>
-          Generate Password
-        </button>
-        <button type="button" onClick={togglePasswordVisibility}>
-          {showPassword ? "Hide" : "Show"} Password
-        </button>
+              <button className="show-div" type="button" onClick={togglePasswordVisibility}>
+                <img className="show" src="https://cdn-icons-png.flaticon.com/128/2767/2767194.png" />
+              </button>
             </div>
+              <button className="btn" type="button" onClick={generatePassword}>
+                Generate Password
+              </button>
             <div className="btn-login">
               <button type="submit" className="btn">
                 Sign Up
