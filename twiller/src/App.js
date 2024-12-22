@@ -12,7 +12,6 @@ import ProtectedRoute from "./Pages/ProtectedRoute";
 import Lists from "./Pages/Lists/Lists";
 import Profile from "./Pages/Profile/Profile";
 import More from "./Pages/more/More";
-import ResetPass from "./Pages/Login/ResetPass";
 import ForgotPass from "./Pages/Login/ForgotPass";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
 import Bookmark from "./Pages/Bookmark/Bookmark";
@@ -43,7 +42,6 @@ function App() {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/forgotpassword" element={<ForgotPass />} />
-          <Route path="/reset-password" element={<ResetPass />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<Home />}>
             <Route path="feed" element={<Feed />} />

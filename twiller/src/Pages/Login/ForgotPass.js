@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import app from '../../context/firbase';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 
 const ForgotPass = () => {
   const [emailOrPhone, setEmailOrPhone] = useState('');
@@ -8,6 +10,8 @@ const ForgotPass = () => {
   const [message, setMessage] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const navigate = useNavigate();
+  const auth = getAuth(app);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +33,7 @@ const ForgotPass = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/verify-otp', { emailOrPhone, otp });
       if (response.data.success) {
-        navigate('/reset-password', { state: { emailOrPhone } });
+        await sendPasswordResetEmail(auth, emailOrPhone) 
       } else {
         setMessage(response.data.message);
       }

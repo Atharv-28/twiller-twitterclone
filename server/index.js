@@ -40,8 +40,6 @@ async function run() {
     app.post('/api/forgot-password', async (req, res) => {
       const { emailOrPhone } = req.body;
       const currentDate = new Date().toDateString();
-      console.log(emailOrPhone);
-      
 /*
       if (requestLimit[emailOrPhone] === currentDate) {
         return res.status(429).json({ message: "You can only request a password reset once per day." });
@@ -50,8 +48,6 @@ async function run() {
       requestLimit[emailOrPhone] = currentDate;
       const otp = generateOtp();
       otpStore[emailOrPhone] = otp;
-
-      console.log(otp);
       
 
       // Send OTP via email (or SMS)
@@ -62,8 +58,6 @@ async function run() {
           pass: 'exge jbsy zwnj hrot'
         }
       });
-
-      console.log(transporter);
       
 
       const mailOptions = {
@@ -72,12 +66,9 @@ async function run() {
         subject: 'Password Reset OTP',
         text: `Your OTP for password reset is: ${otp}`
       };
-
-      console.log(mailOptions);
       
 
       transporter.sendMail(mailOptions, (error, info) => {
-        console.log(info);
         
         if (error) {
           console.error('Error sending OTP:', error);
