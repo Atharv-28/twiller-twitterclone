@@ -8,7 +8,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PublishIcon from "@mui/icons-material/Publish";
 
 const Posts = ({ p }) => {
-  const { name, username, photo, post, profilephoto } = p;
+  const { name, username, post, profilephoto, media } = p;
   return (
     <div className="post">
       <div className="post__avatar">
@@ -28,7 +28,18 @@ const Posts = ({ p }) => {
             <p>{post}</p>
           </div>
         </div>
-        <img src={photo} alt="" width="500" />
+        {media && (
+          <div className="post__media">
+            {media.endsWith(".mp4") || media.endsWith(".webm") ? (
+              <video width="500" controls>
+                <source src={media} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <img src={media} alt="" width="500" />
+            )}
+          </div>
+        )}
         <div className="post__footer">
           <ChatBubbleOutlineIcon
             className="post__fotter__icon"

@@ -5,9 +5,10 @@ import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternate
 import axios from "axios";
 import { useUserAuth } from "../../../context/UserAuthContext";
 import useLoggedinuser from "../../../hooks/useLoggedinuser";
+
 const Tweetbox = () => {
   const [post, setpost] = useState("");
-  const [imageurl, setimageurl] = useState("");
+  const [mediaUrl, setMediaUrl] = useState("");
   const [isloading, setisloading] = useState(false);
   const [name, setname] = useState("");
   const [username, setusername] = useState("");
@@ -18,33 +19,34 @@ const Tweetbox = () => {
     ? loggedinsuer[0].profileImage
     : user && user.photoURL;
 
-  const handleuploadimage = (e) => {
+  const handleUploadMedia = async (e) => {
     setisloading(true);
-    const image = e.target.files[0];
-    // console.log(image)
+    const media = e.target.files[0];
     const formData = new FormData();
-    formData.set("image", image);
-    axios
-      .post(
-        "https://api.imgbb.com/1/upload?key=b0ea2f6cc0f276633b2a8a86d2c43335",
+    formData.append("file", media);
+    formData.append("upload_preset", "ck4cetvf"); // Replace with your Cloudinary upload preset
+
+    try {
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/dhnplptdz/upload", 
         formData
-      )
-      .then((res) => {
-        setimageurl(res.data.data.display_url);
-        // console.log(res.data.data.display_url);
-        setisloading(false);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+      );
+      setMediaUrl(res.data.secure_url);
+      console.log(mediaUrl);
+      console.log(res.data.secure_url);
+      setisloading(false);
+    } catch (error) {
+      console.error("Error uploading media:", error);
+      setisloading(false);
+    }
   };
+
   const handletweet = (e) => {
     e.preventDefault();
     if (user?.providerData[0]?.providerId === "password") {
       fetch(`http://localhost:5000/loggedinuser?email=${email}`)
         .then((res) => res.json())
         .then((data) => {
-          // console.log(data[0].name);
           setname(data[0]?.name);
           setusername(data[0]?.username);
         });
@@ -52,19 +54,17 @@ const Tweetbox = () => {
       setname(user?.displayName);
       setusername(email?.split("@")[0]);
     }
-    // console.log(name);
     if (name) {
       const userpost = {
         profilephoto: userprofilepic,
         post: post,
-        photo: imageurl,
+        media: mediaUrl,
         username: username,
         name: name,
         email: email,
       };
-      // console.log(userpost);
       setpost("");
-      setimageurl("");
+      setMediaUrl("");
       fetch("http://localhost:5000/post", {
         method: "POST",
         headers: {
@@ -78,6 +78,7 @@ const Tweetbox = () => {
         });
     }
   };
+
   return (
     <div className="tweetBox">
       <form onSubmit={handletweet}>
@@ -98,27 +99,24 @@ const Tweetbox = () => {
           />
         </div>
         <div className="imageIcon_tweetButton">
-          <label htmlFor="image" className="imageIcon">
+          <label htmlFor="media" className="imageIcon">
             {isloading ? (
-              <p>Uploading Image</p>
+              <p>Uploading Media</p>
             ) : (
               <p>
-                {imageurl ? (
-                  "Image Uploaded"
-                ) : (
-                  <AddPhotoAlternateOutlinedIcon />
-                )}
+                {mediaUrl ? "Media Uploaded" : <AddPhotoAlternateOutlinedIcon />}
               </p>
             )}
           </label>
           <input
             type="file"
-            id="image"
+            id="media"
             className="imageInput"
-            onChange={handleuploadimage}
+            accept="image/*,video/*"
+            onChange={handleUploadMedia}
           />
           <Button className="tweetBox__tweetButton" type="submit">
-            Tweets
+            Tweet
           </Button>
         </div>
       </form>

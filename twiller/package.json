@@ -11,6 +11,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
+    "cloudinary": "^2.5.1",
     "firebase": "^10.12.3",
     "leaflet": "^1.9.4",
     "leaflet.heat": "^0.2.0",
