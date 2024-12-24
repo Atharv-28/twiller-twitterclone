@@ -32,8 +32,6 @@ const Tweetbox = () => {
         formData
       );
       setMediaUrl(res.data.secure_url);
-      console.log(mediaUrl);
-      console.log(res.data.secure_url);
       setisloading(false);
     } catch (error) {
       console.error("Error uploading media:", error);
