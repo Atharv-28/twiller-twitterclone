@@ -24,7 +24,7 @@ const Tweetbox = () => {
     const media = e.target.files[0];
     const formData = new FormData();
     formData.append("file", media);
-    formData.append("upload_preset", "ck4cetvf"); // Replace with your Cloudinary upload preset
+    formData.append("upload_preset", "ck4cetvf"); 
 
     try {
       const res = await axios.post(

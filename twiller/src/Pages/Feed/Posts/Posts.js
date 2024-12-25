@@ -13,7 +13,7 @@ const CustomVideoPlayer = ({ src }) => {
   let tapCount = 0;
 
   const handleTap = (e) => {
-    e.preventDefault(); // Prevent default action for double-tap
+    e.preventDefault();
     tapCount++;
     clearTimeout(tapTimeout);
     tapTimeout = setTimeout(() => {
@@ -26,7 +26,6 @@ const CustomVideoPlayer = ({ src }) => {
       }
 
       if (tapCount === 1) {
-        // Single tap
         if (e.target === videoRef.current) {
           if (videoRef.current.paused) {
             videoRef.current.play();
@@ -35,12 +34,11 @@ const CustomVideoPlayer = ({ src }) => {
           }
         }
       } else if (tapCount === 2) {
-        // Double tap
         if (x < rect.width / 3) {
-          // Double tap on the left side
+          //for left side
           videoRef.current.currentTime -= 10;
         } else if (x > (2 * rect.width) / 3) {
-          // Double tap on the right side
+          //for right side
           videoRef.current.currentTime += 10;
         }
       } else if (tapCount === 3) {
@@ -67,7 +65,7 @@ const CustomVideoPlayer = ({ src }) => {
       controls
       onClick={handleTap}
       onTouchEnd={handleTap}
-      onDoubleClick={(e) => e.preventDefault()} // Prevent default double-click behavior
+      onDoubleClick={(e) => e.preventDefault()}
     >
       <source src={src} type="video/mp4" />
       Your browser does not support the video tag.
