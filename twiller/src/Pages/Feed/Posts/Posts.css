@@ -1,52 +1,90 @@
 .post {
-    display: flex;
-    align-items: flex-start;
-    border-bottom: 1px solid var(--twitter-background);
-    padding-bottom: 10px;
-  }
-  
-  .post__body {
-    flex: 1;
-    padding: 10px;
-  }
-  
-  .post__body>img {
-    border-radius: 20px;
-  }
-  
-  .post__footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 10px;
-    margin-top: 10px;
-  }
-  
-  .post__footer__icon:hover {
-    cursor: pointer;
-    color: var(--twitter-color);
-  }
-  
-  .post__headerDescription {
-    margin-bottom: 10px;
-    font-size: 15px;
-  }
-  
-  .post__headerText>h3 {
-    font-size: 15px;
-    margin-bottom: 5px;
-  }
-  
-  .post__badge {
-    font-size: 14px !important;
-    color: var(--twitter-color);
-  }
-  
-  .post__headerSpecial {
-    font-weight: 600;
-    font-size: 12px;
-    color: gray;
-  }
-  
-  .post__avatar {
-    padding: 20px;
-  }
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--twitter-background);
+  padding-bottom: 10px;
+}
+
+.post__body {
+  flex: 1;
+  padding: 10px;
+}
+
+.post__body>img {
+  border-radius: 20px;
+}
+
+.post__footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  margin-top: 10px;
+}
+
+.post__footer__icon:hover {
+  cursor: pointer;
+  color: var(--twitter-color);
+}
+
+.post__headerDescription {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.post__headerText>h3 {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.post__badge {
+  font-size: 14px !important;
+  color: var(--twitter-color);
+}
+
+.post__headerSpecial {
+  font-weight: 600;
+  font-size: 12px;
+  color: gray;
+}
+
+.post__avatar {
+  padding: 20px;
+}
+
+.comments-section {
+  margin-top: 10px;
+}
+
+.comment {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.comments-section form {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.comments-section input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.comments-section button {
+  padding: 10px 20px;
+  background-color: var(--twitter-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comments-section button:hover {
+  background-color: #1a8cd8;
+}

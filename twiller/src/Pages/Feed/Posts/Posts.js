@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./Posts.css";
 import { Avatar } from "@mui/material";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
@@ -6,6 +6,7 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import RepeatIcon from "@mui/icons-material/Repeat";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PublishIcon from "@mui/icons-material/Publish";
+import axios from "axios";
 
 const CustomVideoPlayer = ({ src }) => {
   const videoRef = useRef(null);
@@ -74,7 +75,31 @@ const CustomVideoPlayer = ({ src }) => {
 };
 
 const Posts = ({ p }) => {
-  const { name, username, post, profilephoto, media } = p;
+  const { _id, name, username, post, profilephoto, media } = p;
+  const [showComments, setShowComments] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
+
+  const toggleComments = async () => {
+    setShowComments(!showComments);
+    if (!showComments) {
+      const res = await axios.get(`http://localhost:5000/comments?postId=${_id}`);
+      setComments(res.data);
+    }
+  };
+
+  const handleAddComment = async (e) => {
+    e.preventDefault();
+    const commentData = {
+      postId: _id,
+      comment: newComment,
+    };
+    await axios.post("http://localhost:5000/comments", commentData);
+    setNewComment("");
+    const res = await axios.get(`http://localhost:5000/comments?postId=${_id}`);
+    setComments(res.data);
+  };
+
   return (
     <div className="post">
       <div className="post__avatar">
@@ -105,13 +130,33 @@ const Posts = ({ p }) => {
         )}
         <div className="post__footer">
           <ChatBubbleOutlineIcon
-            className="post__fotter__icon"
+            className="post__footer__icon"
             fontSize="small"
+            onClick={toggleComments}
           />
-          <RepeatIcon className="post__fotter__icon" fontSize="small" />
-          <FavoriteBorderIcon className="post__fotter__icon" fontSize="small" />
-          <PublishIcon className="post__fotter__icon" fontSize="small" />
+          <RepeatIcon className="post__footer__icon" fontSize="small" />
+          <FavoriteBorderIcon className="post__footer__icon" fontSize="small" />
+          <PublishIcon className="post__footer__icon" fontSize="small" />
         </div>
+        {showComments && (
+          <div className="comments-section">
+            {comments.map((comment, index) => (
+              <div key={index} className="comment">
+                <p>{comment.comment}</p>
+              </div>
+            ))}
+            <form onSubmit={handleAddComment}>
+              <input
+                type="text"
+                placeholder="Add a comment"
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                required
+              />
+              <button type="submit">Comment</button>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );

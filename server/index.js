@@ -120,6 +120,22 @@ async function run() {
       res.send(post);
     });
 
+    app.post("/comments", async (req, res) => {
+      const { postId, comment } = req.body;
+      const commentData = {
+        postId,
+        comment,
+        createdAt: new Date(),
+      };
+      const result = await client.db("database").collection("comments").insertOne(commentData);
+      res.send(result);
+    });
+    
+    app.get("/comments", async (req, res) => {
+      const postId = req.query.postId;
+      const comments = await client.db("database").collection("comments").find({ postId }).toArray();
+      res.send(comments);
+    });
     app.get("/user", async (req, res) => {
       const user = await usercollection.find().toArray();
       res.send(user);
