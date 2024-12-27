@@ -53,7 +53,6 @@
 
 .comments-section {
   margin-top: 10px;
-  border: 1px solid black;
 }
 
 .comment {
@@ -73,7 +72,6 @@
 .comment__content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .comment__name {
@@ -81,20 +79,18 @@
   font-size: 0.9rem;
 }
 
-.comment-form{
+.comments-section form {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  border: 2px solid green;
+  margin-top: 10px;
 }
-
 .comments-section input {
-  flex: 1;
+  flex: 1; 
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-right: 10px;
+  margin-right: 5px;
+  margin-top: 0;
 }
 
 .comments-section button {
