@@ -7,6 +7,9 @@ import RepeatIcon from "@mui/icons-material/Repeat";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PublishIcon from "@mui/icons-material/Publish";
 import axios from "axios";
+import { useUserAuth } from "../../../context/UserAuthContext"; // Import useUserAuth
+import useLoggedinuser from "../../../hooks/useLoggedinuser"; // Import useLoggedinuser
+
 
 const CustomVideoPlayer = ({ src }) => {
   const videoRef = useRef(null);
@@ -79,6 +82,10 @@ const Posts = ({ p }) => {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const { user } = useUserAuth();
+  const [loggedinsuer] = useLoggedinuser();
+  const commenterName = loggedinsuer[0]?.name || user?.displayName;
+  const commenterProfilePic = loggedinsuer[0]?.profileImage || user?.photoURL;
 
   const toggleComments = async () => {
     setShowComments(!showComments);
@@ -93,6 +100,8 @@ const Posts = ({ p }) => {
     const commentData = {
       postId: _id,
       comment: newComment,
+      commenterName,
+      commenterProfilePic,
     };
     await axios.post("http://localhost:5000/comments", commentData);
     setNewComment("");
@@ -142,7 +151,11 @@ const Posts = ({ p }) => {
           <div className="comments-section">
             {comments.map((comment, index) => (
               <div key={index} className="comment">
-                <p>{comment.comment}</p>
+                <Avatar src={comment.commenterProfilePic} className="comment__avatar" />
+                <div className="comment__content">
+                  <span className="comment__name">{comment.commenterName}</span>
+                  <p>{comment.comment}</p>
+                </div>
               </div>
             ))}
             <form onSubmit={handleAddComment}>

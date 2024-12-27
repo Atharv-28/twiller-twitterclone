@@ -56,9 +56,25 @@
 }
 
 .comment {
+  display: flex;
+  align-items: flex-start;
   background-color: #f5f5f5;
   padding: 10px;
   border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.comment__avatar {
+  margin-right: 10px;
+}
+
+.comment__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment__name {
+  font-weight: bold;
   margin-bottom: 5px;
 }
 

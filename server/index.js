@@ -121,10 +121,12 @@ async function run() {
     });
 
     app.post("/comments", async (req, res) => {
-      const { postId, comment } = req.body;
+      const { postId, comment, commenterName, commenterProfilePic } = req.body;
       const commentData = {
         postId,
         comment,
+        commenterName,
+        commenterProfilePic,
         createdAt: new Date(),
       };
       const result = await client.db("database").collection("comments").insertOne(commentData);
