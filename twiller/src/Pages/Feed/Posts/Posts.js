@@ -151,14 +151,14 @@ const Posts = ({ p }) => {
           <div className="comments-section">
             {comments.map((comment, index) => (
               <div key={index} className="comment">
-                <Avatar src={comment.commenterProfilePic} className="comment__avatar" />
+                <Avatar sx={{width:24,height:24}} src={comment.commenterProfilePic} className="comment__avatar" />
                 <div className="comment__content">
                   <span className="comment__name">{comment.commenterName}</span>
-                  <p>{comment.comment}</p>
+                  <span>{comment.comment}</span>
                 </div>
               </div>
             ))}
-            <form onSubmit={handleAddComment}>
+            <form className="comment-form" onSubmit={handleAddComment}>
               <input
                 type="text"
                 placeholder="Add a comment"
