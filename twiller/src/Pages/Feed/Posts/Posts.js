@@ -10,56 +10,64 @@ import axios from "axios";
 import { useUserAuth } from "../../../context/UserAuthContext"; // Import useUserAuth
 import useLoggedinuser from "../../../hooks/useLoggedinuser"; // Import useLoggedinuser
 
-
 const CustomVideoPlayer = ({ src }) => {
   const videoRef = useRef(null);
-  let tapTimeout = null;
-  let tapCount = 0;
+  const [tapCount, setTapCount] = useState(0);
 
-  const handleTap = (e) => {
-    e.preventDefault();
-    tapCount++;
-    clearTimeout(tapTimeout);
-    tapTimeout = setTimeout(() => {
-      const rect = videoRef.current.getBoundingClientRect();
-      let x;
-      if (e.type === "click") {
-        x = e.clientX - rect.left;
-      } else if (e.type === "touchend") {
-        x = e.changedTouches[0].clientX - rect.left;
-      }
+  useEffect(() => {
+    if (tapCount === 1) {
+      const singleTapTimeout = setTimeout(() => {
+        const rect = videoRef.current.getBoundingClientRect();
+        const x = videoRef.current.lastTapX;
 
-      if (tapCount === 1) {
-        if (e.target === videoRef.current) {
+        if (x > rect.width / 3 && x < (2 * rect.width) / 3) {
+          // Single tap in the middle third
           if (videoRef.current.paused) {
             videoRef.current.play();
           } else {
             videoRef.current.pause();
           }
         }
-      } else if (tapCount === 2) {
-        if (x < rect.width / 3) {
-          //for left side
-          videoRef.current.currentTime -= 10;
-        } else if (x > (2 * rect.width) / 3) {
-          //for right side
-          videoRef.current.currentTime += 10;
-        }
-      } else if (tapCount === 3) {
-        // Triple tap
-        if (x < rect.width / 3) {
-          // Triple tap on the left side
-          alert("Show comment section");
-        } else if (x > (2 * rect.width) / 3) {
-          // Triple tap on the right side
-          window.close();
-        } else {
-          // Triple tap in the middle
-          alert("Move to next video");
-        }
+        setTapCount(0);
+      }, 300);
+
+      return () => clearTimeout(singleTapTimeout);
+    } else if (tapCount === 2) {
+      const rect = videoRef.current.getBoundingClientRect();
+      const x = videoRef.current.lastTapX;
+
+      if (x < rect.width / 3) {
+        // Double tap on the left side
+        videoRef.current.currentTime -= 10;
+      } else if (x > (2 * rect.width) / 3) {
+        // Double tap on the right side
+        videoRef.current.currentTime += 10;
       }
-      tapCount = 0;
-    }, 300);
+      setTapCount(0);
+    } else if (tapCount === 3) {
+      const rect = videoRef.current.getBoundingClientRect();
+      const x = videoRef.current.lastTapX;
+
+      if (x < rect.width / 3) {
+        // Triple tap on the left side
+        alert("Show comment section");
+      } else if (x > (2 * rect.width) / 3) {
+        // Triple tap on the right side
+        window.close();
+      } else {
+        // Triple tap in the middle
+        alert("Move to next video");
+      }
+      setTapCount(0);
+    }
+  }, [tapCount]);
+
+  const handleTap = (e) => {
+    e.preventDefault();
+    const rect = videoRef.current.getBoundingClientRect();
+    const x = e.type === "click" ? e.clientX - rect.left : e.changedTouches[0].clientX - rect.left;
+    videoRef.current.lastTapX = x;
+    setTapCount((prev) => prev + 1);
   };
 
   return (
@@ -82,8 +90,8 @@ const Posts = ({ p }) => {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  const { user } = useUserAuth();
-  const [loggedinsuer] = useLoggedinuser();
+  const { user } = useUserAuth(); // Use useUserAuth
+  const [loggedinsuer] = useLoggedinuser(); // Use useLoggedinuser
   const commenterName = loggedinsuer[0]?.name || user?.displayName;
   const commenterProfilePic = loggedinsuer[0]?.profileImage || user?.photoURL;
 
