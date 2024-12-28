@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState} from "react";
 import "./Posts.css";
 import { Avatar } from "@mui/material";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
@@ -7,8 +7,8 @@ import RepeatIcon from "@mui/icons-material/Repeat";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PublishIcon from "@mui/icons-material/Publish";
 import axios from "axios";
-import { useUserAuth } from "../../../context/UserAuthContext"; // Import useUserAuth
-import useLoggedinuser from "../../../hooks/useLoggedinuser"; // Import useLoggedinuser
+import { useUserAuth } from "../../../context/UserAuthContext";
+import useLoggedinuser from "../../../hooks/useLoggedinuser"; 
 import CustomVideoPlayer from "./VideoPlayer/CustomVideoPlayer";
 
 const Posts = ({ p }) => {
@@ -16,8 +16,8 @@ const Posts = ({ p }) => {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  const { user } = useUserAuth(); // Use useUserAuth
-  const [loggedinsuer] = useLoggedinuser(); // Use useLoggedinuser
+  const { user } = useUserAuth(); 
+  const [loggedinsuer] = useLoggedinuser();
   const commenterName = loggedinsuer[0]?.name || user?.displayName;
   const commenterProfilePic = loggedinsuer[0]?.profileImage || user?.photoURL;
 
