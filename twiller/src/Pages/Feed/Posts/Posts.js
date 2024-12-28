@@ -43,6 +43,18 @@ const Posts = ({ p }) => {
     setComments(res.data);
   };
 
+  const handleTripleTapLeft = () => {
+    toggleComments();
+  };
+
+  const handleTripleTapMiddle = () => {
+    alert("Move to next video");
+  };
+
+  const handleTripleTapRight = () => {
+    window.close();
+  };
+
   return (
     <div className="post">
       <div className="post__avatar">
@@ -65,8 +77,12 @@ const Posts = ({ p }) => {
         {media && (
           <div className="post__media">
             {media.endsWith(".mp4") || media.endsWith(".webm") ? (
-              <CustomVideoPlayer src={media} />
-            ) : (
+              <CustomVideoPlayer
+                src={media}
+                onTripleTapLeft={handleTripleTapLeft}
+                onTripleTapMiddle={handleTripleTapMiddle}
+                onTripleTapRight={handleTripleTapRight}
+              />            ) : (
               <img src={media} alt="" width="500" />
             )}
           </div>

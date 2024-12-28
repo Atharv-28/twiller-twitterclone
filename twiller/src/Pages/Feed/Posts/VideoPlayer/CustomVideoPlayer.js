@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-const CustomVideoPlayer = ({ src }) => {
+const CustomVideoPlayer = ({ src, onTripleTapLeft, onTripleTapMiddle, onTripleTapRight }) => {
   const videoRef = useRef(null);
   const tapTimeoutRef = useRef(null);
   const tapCountRef = useRef(0);
@@ -23,9 +23,7 @@ const CustomVideoPlayer = ({ src }) => {
       console.log(`Tap count: ${tapCountRef.current}`);
 
       if (tapCountRef.current === 1) {
-        // Single tap
         if (x > rect.width / 3 && x < (2 * rect.width) / 3) {
-          // Single tap in the middle third
           if (videoRef.current.paused) {
             videoRef.current.play();
           } else {
@@ -33,30 +31,23 @@ const CustomVideoPlayer = ({ src }) => {
           }
         }
       } else if (tapCountRef.current === 2) {
-        // Double tap
         if (x < rect.width / 3) {
-          // Double tap on the left side
           videoRef.current.currentTime -= 10;
         } else if (x > (2 * rect.width) / 3) {
-          // Double tap on the right side
           videoRef.current.currentTime += 10;
         }
       } else if (tapCountRef.current === 3) {
-        // Triple tap
         if (x < rect.width / 3) {
-          // Triple tap on the left side
-          console.log("Triple tap on the left side");
+          onTripleTapLeft();
         } else if (x > (2 * rect.width) / 3) {
-          // Triple tap on the right side
-          alert("Triple tap on the right side");
+          onTripleTapRight();
         } else {
-          // Triple tap in the middle
-          alert("Triple tap in the middle");
+          onTripleTapMiddle();
         }
       }
 
       tapCountRef.current = 0; // Reset tap count
-    }, 300); // Adjust the timeout duration as needed
+    }, 300); 
   };
 
   return (
