@@ -43,7 +43,6 @@ const WeatherFetching = ({ user }) => {
           setMarkers([
             { lat: latitude, lon: longitude, name: response.data.name },
           ]);
-          console.log("Weather data:", response.data);
           setIcon(`https://openweathermap.org/img/wn/${response.data.weather[0].icon}.png`);
         })
         .catch((error) => {
