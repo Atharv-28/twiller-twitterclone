@@ -19,9 +19,6 @@ const CustomVideoPlayer = ({ src, onTripleTapLeft, onTripleTapMiddle, onTripleTa
       } else if (e.type === "touchend") {
         x = e.changedTouches[0].clientX - rect.left;
       }
-
-      console.log(`Tap count: ${tapCountRef.current}`);
-
       if (tapCountRef.current === 1) {
         if (x > rect.width / 3 && x < (2 * rect.width) / 3) {
           if (videoRef.current.paused) {
