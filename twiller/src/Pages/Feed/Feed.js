@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Feed.css";
 import Posts from "./Posts/Posts";
 import Tweetbox from "./Tweetbox/Tweetbox";
@@ -7,6 +7,7 @@ import axios from "axios";
 const Feed = () => {
   const [post, setpost] = useState([]);
   const [currentPostIndex, setCurrentPostIndex] = useState(0);
+  const postRefs = useRef([]);
 
   useEffect(() => {
     fetch("http://localhost:5000/post")
@@ -20,12 +21,16 @@ const Feed = () => {
     let nextPostIndex = currentPostIndex + 1;
     while (
       nextPostIndex < post.length &&
-      !(post[nextPostIndex].media.endsWith(".mp4") || post[nextPostIndex].media.endsWith(".webm"))
+      !(
+        post[nextPostIndex].media.endsWith(".mp4") ||
+        post[nextPostIndex].media.endsWith(".webm")
+      )
     ) {
       nextPostIndex++;
     }
     if (nextPostIndex < post.length) {
       setCurrentPostIndex(nextPostIndex);
+      postRefs.current[nextPostIndex].scrollIntoView({ behavior: "smooth" });
     } else {
       alert("No more video posts available");
     }
@@ -46,14 +51,16 @@ const Feed = () => {
       </div>
       <Tweetbox />
       {post.map((p, index) => (
-        <Posts
-          key={p._id}
-          p={p}
-          isCurrentPost={index === currentPostIndex}
-          onTripleTapLeft={handleTripleTapLeft}
-          onTripleTapMiddle={handleTripleTapMiddle}
-          onTripleTapRight={handleTripleTapRight}
-        />
+        <div key={p._id} ref={(el) => (postRefs.current[index] = el)}>
+          <Posts
+            key={p._id}
+            p={p}
+            isCurrentPost={index === currentPostIndex}
+            onTripleTapLeft={handleTripleTapLeft}
+            onTripleTapMiddle={handleTripleTapMiddle}
+            onTripleTapRight={handleTripleTapRight}
+          />
+        </div>
       ))}
     </div>
   );
