@@ -11,7 +11,7 @@ import { useUserAuth } from "../../../context/UserAuthContext";
 import useLoggedinuser from "../../../hooks/useLoggedinuser"; 
 import CustomVideoPlayer from "./VideoPlayer/CustomVideoPlayer";
 
-const Posts = ({ p }) => {
+const Posts = ({ p, isCurrentPost, onTripleTapLeft, onTripleTapMiddle, onTripleTapRight }) => {
   const { _id, name, username, post, profilephoto, media } = p;
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
@@ -28,6 +28,7 @@ const Posts = ({ p }) => {
       setComments(res.data);
     }
   };
+  
 
   const handleAddComment = async (e) => {
     e.preventDefault();
@@ -41,18 +42,6 @@ const Posts = ({ p }) => {
     setNewComment("");
     const res = await axios.get(`http://localhost:5000/comments?postId=${_id}`);
     setComments(res.data);
-  };
-
-  const handleTripleTapLeft = () => {
-    toggleComments();
-  };
-
-  const handleTripleTapMiddle = () => {
-    alert("Move to next video");
-  };
-
-  const handleTripleTapRight = () => {
-    window.close();
   };
 
   return (
@@ -78,11 +67,12 @@ const Posts = ({ p }) => {
           <div className="post__media">
             {media.endsWith(".mp4") || media.endsWith(".webm") ? (
               <CustomVideoPlayer
-                src={media}
-                onTripleTapLeft={handleTripleTapLeft}
-                onTripleTapMiddle={handleTripleTapMiddle}
-                onTripleTapRight={handleTripleTapRight}
-              />            ) : (
+              src={media}
+              onTripleTapLeft={() => onTripleTapLeft(toggleComments)}
+              onTripleTapMiddle={onTripleTapMiddle}
+              onTripleTapRight={onTripleTapRight}
+            />
+                   ) : (
               <img src={media} alt="" width="500" />
             )}
           </div>
