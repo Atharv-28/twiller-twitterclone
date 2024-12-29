@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import "./Posts.css";
 import { Avatar } from "@mui/material";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
@@ -8,7 +8,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PublishIcon from "@mui/icons-material/Publish";
 import axios from "axios";
 import { useUserAuth } from "../../../context/UserAuthContext";
-import useLoggedinuser from "../../../hooks/useLoggedinuser"; 
+import useLoggedinuser from "../../../hooks/useLoggedinuser";
 import CustomVideoPlayer from "./VideoPlayer/CustomVideoPlayer";
 
 const Posts = ({ p, isCurrentPost, onTripleTapLeft, onTripleTapMiddle, onTripleTapRight }) => {
@@ -16,7 +16,7 @@ const Posts = ({ p, isCurrentPost, onTripleTapLeft, onTripleTapMiddle, onTripleT
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  const { user } = useUserAuth(); 
+  const { user } = useUserAuth();
   const [loggedinsuer] = useLoggedinuser();
   const commenterName = loggedinsuer[0]?.name || user?.displayName;
   const commenterProfilePic = loggedinsuer[0]?.profileImage || user?.photoURL;
@@ -28,7 +28,6 @@ const Posts = ({ p, isCurrentPost, onTripleTapLeft, onTripleTapMiddle, onTripleT
       setComments(res.data);
     }
   };
-  
 
   const handleAddComment = async (e) => {
     e.preventDefault();
@@ -45,7 +44,7 @@ const Posts = ({ p, isCurrentPost, onTripleTapLeft, onTripleTapMiddle, onTripleT
   };
 
   return (
-    <div className="post">
+    <div className={`post ${isCurrentPost ? "current-post" : ""}`}>
       <div className="post__avatar">
         <Avatar src={profilephoto} />
       </div>
@@ -67,12 +66,12 @@ const Posts = ({ p, isCurrentPost, onTripleTapLeft, onTripleTapMiddle, onTripleT
           <div className="post__media">
             {media.endsWith(".mp4") || media.endsWith(".webm") ? (
               <CustomVideoPlayer
-              src={media}
-              onTripleTapLeft={() => onTripleTapLeft(toggleComments)}
-              onTripleTapMiddle={onTripleTapMiddle}
-              onTripleTapRight={onTripleTapRight}
-            />
-                   ) : (
+                src={media}
+                onTripleTapLeft={() => onTripleTapLeft(toggleComments)}
+                onTripleTapMiddle={() => onTripleTapMiddle()}
+                onTripleTapRight={onTripleTapRight}
+              />
+            ) : (
               <img src={media} alt="" width="500" />
             )}
           </div>
@@ -91,7 +90,7 @@ const Posts = ({ p, isCurrentPost, onTripleTapLeft, onTripleTapMiddle, onTripleT
           <div className="comments-section">
             {comments.map((comment, index) => (
               <div key={index} className="comment">
-                <Avatar sx={{width:24,height:24}} src={comment.commenterProfilePic} className="comment__avatar" />
+                <Avatar sx={{ width: 24, height: 24 }} src={comment.commenterProfilePic} className="comment__avatar" />
                 <div className="comment__content">
                   <span className="comment__name">{comment.commenterName}</span>
                   <span>{comment.comment}</span>

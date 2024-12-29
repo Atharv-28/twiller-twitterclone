@@ -17,14 +17,14 @@ const Feed = () => {
       });
   }, []);
 
-  const handleTripleTapMiddle = () => {
-    let nextPostIndex = currentPostIndex + 1;
+  const handleTripleTapMiddle = (currentIndex) => {
+    if (currentIndex !== currentPostIndex) {
+      setCurrentPostIndex(currentIndex);
+    }
+    let nextPostIndex = currentIndex + 1;
     while (
       nextPostIndex < post.length &&
-      !(
-        post[nextPostIndex].media.endsWith(".mp4") ||
-        post[nextPostIndex].media.endsWith(".webm")
-      )
+      !(post[nextPostIndex].media.endsWith(".mp4") || post[nextPostIndex].media.endsWith(".webm"))
     ) {
       nextPostIndex++;
     }
@@ -57,7 +57,7 @@ const Feed = () => {
             p={p}
             isCurrentPost={index === currentPostIndex}
             onTripleTapLeft={handleTripleTapLeft}
-            onTripleTapMiddle={handleTripleTapMiddle}
+            onTripleTapMiddle={() => handleTripleTapMiddle(index)}
             onTripleTapRight={handleTripleTapRight}
           />
         </div>
