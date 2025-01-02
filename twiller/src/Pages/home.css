@@ -1,0 +1,7 @@
+@media screen and (max-width:688px) {
+    .app {
+        display: block;
+        width: 100vw;
+        overflow: none;
+    }
+}

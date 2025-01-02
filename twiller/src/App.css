@@ -12,8 +12,10 @@ body {
   padding: 0 10px;
 }
 
-@media screen and (max-width:688px) {
+@media screen and (max-width: 768px) {
   .app {
     display: block;
+    width: 100vw;
+    overflow: hidden;
   }
 }

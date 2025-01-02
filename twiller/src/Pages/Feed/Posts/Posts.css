@@ -105,3 +105,11 @@
 .comments-section button:hover {
   background-color: #1a8cd8;
 }
+
+@media screen and (max-width:688px) {
+
+  .post{
+    width: 100%;
+    border: 2px solid red;
+  }
+}
