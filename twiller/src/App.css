@@ -16,6 +16,5 @@ body {
   .app {
     display: block;
     width: 100vw;
-    overflow: hidden;
   }
 }

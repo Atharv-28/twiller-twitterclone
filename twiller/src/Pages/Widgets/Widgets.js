@@ -13,7 +13,10 @@ const Widgets = () => {
 
   return (
     <>
-      <MenuIcon className="widgets__hamburgerIcon" onClick={toggleWidgets} />
+      <MenuIcon
+        className={`widgets__hamburgerIcon ${isWidgetsOpen ? "open" : ""}`}
+        onClick={toggleWidgets}
+      />
       <div className={`widgets__hamburger ${isWidgetsOpen ? "open" : ""}`}>
         <div className="widgets__input">
           <SearchIcon className="widget__searchIcon" />

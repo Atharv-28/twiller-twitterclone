@@ -45,7 +45,10 @@ const Sidebar = ({ handlelogout, user }) => {
 
   return (
     <>
-      <MenuIcon className="sidebar__hamburgerIcon" onClick={toggleSidebar} />
+      <MenuIcon
+        className={`sidebar__hamburgerIcon ${isSidebarOpen ? "open" : ""}`}
+        onClick={toggleSidebar}
+      />
       <div className={`sidebar__hamburger ${isSidebarOpen ? "open" : ""}`}>
         <TwitterIcon className="sidebar__twitterIcon" />
         <Customlink to="/home/feed">
