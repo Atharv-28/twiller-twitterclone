@@ -1,18 +1,21 @@
-.sidebar {
-  border-right: 1px solid var(--twitter-background);
-  flex: 0.3;
-  position: inherit;
-  min-width: 150px;
-  margin-top: 20px;
-  padding-right: 20px;
-  overflow-y: scroll;
+  
+  .sidebar_Container {
+    border-right: 1px solid var(--twitter-background);
+    flex: 0.3;
+    overflow-y: scroll;
+    position: inherit;
+    display: flex;
+    flex-direction: row;
+    padding-right: 20px;
+  min-width: 250px;
+  padding-top: 2vh;
 }
 
-.sidebar__hamburgerIcon{
-  display: hidden;
+.sidebar__hamburgerIcon {
+  visibility: hidden;
 }
 
-.sidebar::-webkit-scrollbar {
+.sidebar_Container::-webkit-scrollbar {
   display: none;
 }
 
@@ -24,6 +27,7 @@
 }
 
 .sidebar__tweet {
+  width: 90%;
   background-color: var(--twitter-color) !important;
   border: none !important;
   color: white !important;
@@ -34,7 +38,7 @@
   margin-top: 10px !important;
 }
 
-.sidebar>.Profile__info {
+.Profile__info {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -55,11 +59,16 @@
   gap: 10px;
 }
 
-.user__info>h4 {
+.user__info > h4 {
   font-size: 14px;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 10px;
 }
 
-.user__info>h5 {
+.user__info > h5 {
+  margin: 0;
+  padding: 0;
   opacity: 50%;
 }
 
@@ -67,11 +76,13 @@
   .sidebar {
     display: none;
   }
-
+  .sidebar__hamburgerIcon {
+    visibility: visible;
+  }
   .sidebar__hamburger {
     display: block;
     position: fixed;
-    top: 0;
+    top: 10;
     left: 0;
     background-color: white;
     width: 250px;

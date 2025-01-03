@@ -44,7 +44,7 @@ const Sidebar = ({ handlelogout, user }) => {
   };
 
   return (
-    <>
+    <div className="sidebar_Container">
       <MenuIcon
         className={`sidebar__hamburgerIcon ${isSidebarOpen ? "open" : ""}`}
         onClick={toggleSidebar}
@@ -75,7 +75,7 @@ const Sidebar = ({ handlelogout, user }) => {
         <Customlink to="/home/more">
           <Sidebaroption Icon={MoreIcon} text="More" />
         </Customlink>
-        <Button variant="outlined" className="sidebar__tweet" fullWidth>
+        <Button variant="outlined" className="sidebar__tweet">
           Tweet
         </Button>
         <div className="Profile__info">
@@ -142,7 +142,7 @@ const Sidebar = ({ handlelogout, user }) => {
           </Menu>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
