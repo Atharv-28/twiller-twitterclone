@@ -8,6 +8,10 @@
   display: none;
 }
 
+.widgets__hamburgerIcon{
+  visibility: hidden;
+}
+
 .widgets__input {
   display: flex;
   align-items: center;
@@ -44,6 +48,10 @@
 @media screen and (max-width: 768px) {
   .widgets {
     display: none;
+  }
+
+  .widgets__hamburgerIcon{
+    visibility: visible;
   }
 
   .widgets__hamburger {
