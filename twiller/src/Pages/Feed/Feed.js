@@ -50,7 +50,7 @@ const Feed = () => {
       </div>
       <Tweetbox />
       {post.map((p, index) => (
-        <div key={p._id} ref={(el) => (postRefs.current[index] = el)}>
+        <div className="Post_Container" key={p._id} ref={(el) => (postRefs.current[index] = el)}>
           <Posts
             key={p._id}
             p={p}

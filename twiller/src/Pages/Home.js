@@ -4,7 +4,6 @@ import Sidebar from "./Sidebar/sidebar";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
-import "./home.css";
 
 const Home = () => {
   const { logOut, user } = useUserAuth();
