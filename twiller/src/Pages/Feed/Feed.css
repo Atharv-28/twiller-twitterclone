@@ -23,10 +23,6 @@
     font-weight: 800;
   }
 
-  .Post_Container{
-    border: 2px solid green;
-  }
-
   @media screen and (max-width: 768px) {
     .feed {
       max-width: 99vw;

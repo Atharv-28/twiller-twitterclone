@@ -1,6 +1,12 @@
 import React, { useRef } from "react";
+import "../Posts.css";
 
-const CustomVideoPlayer = ({ src, onTripleTapLeft, onTripleTapMiddle, onTripleTapRight }) => {
+const CustomVideoPlayer = ({
+  src,
+  onTripleTapLeft,
+  onTripleTapMiddle,
+  onTripleTapRight,
+}) => {
   const videoRef = useRef(null);
   const tapTimeoutRef = useRef(null);
   const tapCountRef = useRef(0);
@@ -44,13 +50,13 @@ const CustomVideoPlayer = ({ src, onTripleTapLeft, onTripleTapMiddle, onTripleTa
       }
 
       tapCountRef.current = 0; // Reset tap count
-    }, 300); 
+    }, 300);
   };
 
   return (
     <video
+      className="post_Media"
       ref={videoRef}
-      width="500"
       controls
       onClick={handleTap}
       onTouchEnd={handleTap}

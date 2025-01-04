@@ -63,16 +63,17 @@ const Posts = ({ p, isCurrentPost, onTripleTapLeft, onTripleTapMiddle, onTripleT
           </div>
         </div>
         {media && (
-          <div className="post__media">
+          <div className="post_media_Container">
             {media.endsWith(".mp4") || media.endsWith(".webm") ? (
               <CustomVideoPlayer
+                className="post_Media"
                 src={media}
                 onTripleTapLeft={() => onTripleTapLeft(toggleComments)}
                 onTripleTapMiddle={() => onTripleTapMiddle()}
                 onTripleTapRight={onTripleTapRight}
               />
             ) : (
-              <img src={media} alt="" width="500" />
+              <img className="post_Media" src={media} alt="Failed to Load.."/>
             )}
           </div>
         )}
