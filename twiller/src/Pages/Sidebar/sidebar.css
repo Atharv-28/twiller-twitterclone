@@ -11,6 +11,12 @@
   padding-top: 2vh;
 }
 
+.sidebar__hamburger{
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
 .sidebar__hamburgerIcon {
   visibility: hidden;
 }
