@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Post from "../Posts/posts";
+import Post from "../../Feed/Posts/Posts";
 import { useNavigate } from "react-router-dom";
 import "./Mainprofile.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
