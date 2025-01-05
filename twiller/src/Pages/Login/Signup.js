@@ -21,7 +21,7 @@ const Signup = () => {
   const generatePassword = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/generate-password"
+        "https://twiller-twitterclone-dz1k.onrender.com/api/generate-password"
       );
       setpassword(response.data.password);
       console.log(response.data.password);
@@ -44,7 +44,7 @@ const Signup = () => {
         name: name,
         email: email,
       };
-      fetch("http://localhost:5000/register", {
+      fetch("https://twiller-twitterclone-dz1k.onrender.com/register", {
         method: "POST",
         headers: {
           "content-type": "application/json",

@@ -18,7 +18,7 @@ const ForgotPass = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/forgot-password",
+        "https://twiller-twitterclone-dz1k.onrender.com/api/forgot-password",
         { emailOrPhone }
       );
       setMessage(response.data.message);
@@ -36,7 +36,7 @@ const ForgotPass = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/verify-otp",
+        "https://twiller-twitterclone-dz1k.onrender.com/api/verify-otp",
         { emailOrPhone, otp }
       );
       if (response.data.success) {

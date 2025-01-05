@@ -9,7 +9,7 @@ const Feed = () => {
   const postRefs = useRef([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/post")
+    fetch("https://twiller-twitterclone-dz1k.onrender.com/post")
       .then((res) => res.json())
       .then((data) => {
         setpost(data);

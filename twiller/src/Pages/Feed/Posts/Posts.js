@@ -24,7 +24,7 @@ const Posts = ({ p, isCurrentPost, onTripleTapLeft, onTripleTapMiddle, onTripleT
   const toggleComments = async () => {
     setShowComments(!showComments);
     if (!showComments) {
-      const res = await axios.get(`http://localhost:5000/comments?postId=${_id}`);
+      const res = await axios.get(`https://twiller-twitterclone-dz1k.onrender.com/comments?postId=${_id}`);
       setComments(res.data);
     }
   };
@@ -37,9 +37,9 @@ const Posts = ({ p, isCurrentPost, onTripleTapLeft, onTripleTapMiddle, onTripleT
       commenterName,
       commenterProfilePic,
     };
-    await axios.post("http://localhost:5000/comments", commentData);
+    await axios.post("https://twiller-twitterclone-dz1k.onrender.com/comments", commentData);
     setNewComment("");
-    const res = await axios.get(`http://localhost:5000/comments?postId=${_id}`);
+    const res = await axios.get(`https://twiller-twitterclone-dz1k.onrender.com/comments?postId=${_id}`);
     setComments(res.data);
   };
 

@@ -85,7 +85,7 @@ const Editprofile = ({ user, loggedinuser }) => {
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
     };
-    fetch(`http://localhost:5000/userupdate/${user?.email}`, {
+    fetch(`https://twiller-twitterclone-dz1k.onrender.com/userupdate/${user?.email}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
