@@ -12,3 +12,12 @@
     flex-direction: row;
     align-items: center;
 }
+
+.leaflet-control-container,
+.leaflet-bottom.leaflet-right {
+  z-index: 1;
+}
+
+.leaflet-control-attribution {
+    display: none;
+  }

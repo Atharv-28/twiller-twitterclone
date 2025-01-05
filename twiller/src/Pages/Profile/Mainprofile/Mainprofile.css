@@ -173,6 +173,11 @@
   align-items: center;
 }
 
+.mainprofile-container{
+  height: 100vh;
+  width: 600px;
+}
+
 
 @media screen and (max-width: 768px) {
   .mainprofile-container{
