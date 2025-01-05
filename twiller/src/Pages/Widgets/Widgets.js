@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./widget.css";
 import SearchIcon from "@mui/icons-material/Search";
-import MenuIcon from "@mui/icons-material/Menu";
 import { TwitterTimelineEmbed, TwitterTweetEmbed } from "react-twitter-embed";
 
 const Widgets = () => {
@@ -13,7 +12,7 @@ const Widgets = () => {
 
   return (
     <>
-      <MenuIcon
+      <SearchIcon
         className={`widgets__hamburgerIcon ${isWidgetsOpen ? "open" : ""}`}
         onClick={toggleWidgets}
       />
