@@ -106,9 +106,11 @@ const Mainprofile = ({ user }) => {
       });
   };
   return (
-    <div>
-      <ArrowBackIcon className="arrow-icon" onClick={() => navigate("/")} />
-      <h4 className="heading-4">{username}</h4>
+    <div className="mainprofile-container">
+      <div className="profile-nav">
+        <ArrowBackIcon className="arrow-icon" onClick={() => navigate("/")} />
+        <h4 className="heading-4">{username}</h4>
+      </div>
       <div className="mainprofile">
         <div className="profile-bio">
           {
