@@ -115,6 +115,12 @@ input {
     width: 75%;
     justify-content: center;
 }
+.forgot-password-txt{
+    width: 85%;
+    margin-top: 20px;
+    text-decoration: none;
+    font-size: 15px;
+}
 
 .password-container{
     display: flex;

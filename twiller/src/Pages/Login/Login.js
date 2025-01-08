@@ -78,7 +78,7 @@ const Login = () => {
               <GoogleButton className="g-btn" type="light" onClick={hanglegooglesignin}/>
             </div>
           </div>
-          <div className="forgot-password">
+          <div className="forgot-password-txt">
             Don't have an account
             <Link
               to="/signup"
@@ -87,6 +87,7 @@ const Login = () => {
                 color: "var(--twitter-color)",
                 fontWeight: "600",
                 marginLeft: "5px",
+                fontSize: "15px",
               }}
             >
               Sign Up

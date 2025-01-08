@@ -134,7 +134,7 @@ const Signup = () => {
               onClick={hanglegooglesignin}
             />
           </div>
-          <div className="forgot-password">
+          <div className="forgot-password-txt">
             Already have an account?
             <Link
               to="/login"

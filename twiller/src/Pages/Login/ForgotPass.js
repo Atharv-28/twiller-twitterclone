@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import twitterimg from "../../image/twitter.jpeg";
 import app from "../../context/firbase";
+import TwitterIcon from "@mui/icons-material/Twitter";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import "./login.css";
 
@@ -63,6 +64,7 @@ const ForgotPass = () => {
         <img className="image" src={twitterimg} alt="twitterimage" />
       </div>
       <div className="form-container">
+      <TwitterIcon style={{ color: "skyblue" }} />
         <h2 className="heading">Forgot Password</h2>
         {!otpSent ? (
           <form onSubmit={handleSubmit}>
