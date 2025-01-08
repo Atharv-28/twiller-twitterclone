@@ -44,6 +44,7 @@ const ForgotPass = () => {
         setMessage(
           "OTP verified. Please check your email for the password reset link."
         );
+        navigate("/login");
       } else {
         setMessage(response.data.message);
       }
@@ -74,6 +75,9 @@ const ForgotPass = () => {
               required
             />
             <button type="submit" className="btn">Submit</button>
+            <button type="button" className="btn" onClick={() => navigate("/login")}>
+            Back to Login
+          </button>
           </form>
         ) : (
           <form onSubmit={handleVerifyOtp}>
@@ -86,6 +90,9 @@ const ForgotPass = () => {
               required
             />
             <button className="btn" type="submit">Verify OTP</button>
+            <button type="button" className="btn" onClick={() => navigate("/login")}>
+            Back to Login
+          </button>
           </form>
         )}
         {message && <p className="msg">{message}!!</p>}
