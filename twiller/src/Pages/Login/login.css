@@ -116,7 +116,9 @@ input {
     justify-content: center;
 }
 .forgot-password-txt{
-    width: 85%;
+    width: 75%;
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
     text-decoration: none;
     font-size: 15px;
