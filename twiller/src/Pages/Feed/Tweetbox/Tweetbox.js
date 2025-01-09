@@ -55,7 +55,7 @@ const Tweetbox = () => {
     if (name) {
       const userpost = {
         profilephoto: userprofilepic,
-        post: post,
+        post: post, 
         media: mediaUrl,
         username: username,
         name: name,
