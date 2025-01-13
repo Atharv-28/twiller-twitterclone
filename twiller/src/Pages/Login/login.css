@@ -130,6 +130,10 @@ input {
     gap: 10px;
     align-items:end;
 }
+.warning{
+    color: orange;
+    margin-top: -20px;
+}
 
 .show-div{
     height: 60%;

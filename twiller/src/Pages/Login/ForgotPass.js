@@ -12,14 +12,16 @@ const ForgotPass = () => {
   const [otp, setOtp] = useState("");
   const [message, setMessage] = useState("");
   const [otpSent, setOtpSent] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const auth = getAuth(app);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(
-        "https://twiller-twitterclone-dz1k.onrender.com/api/forgot-password",
+         "https://twiller-twitterclone-dz1k.onrender.com/api/forgot-password",
         { emailOrPhone }
       );
       setMessage(response.data.message);
@@ -29,12 +31,16 @@ const ForgotPass = () => {
         setMessage(error.response.data.message);
       } else {
         setMessage("An error occurred. Please try again.");
+        console.log(error);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(
         "https://twiller-twitterclone-dz1k.onrender.com/api/verify-otp",
@@ -45,6 +51,7 @@ const ForgotPass = () => {
         setMessage(
           "OTP verified. Please check your email for the password reset link."
         );
+        alert("OTP verified. Please check your email for the password reset link.");
         navigate("/login");
       } else {
         setMessage(response.data.message);
@@ -55,6 +62,8 @@ const ForgotPass = () => {
       } else {
         setMessage("An error occurred. Please try again.");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,8 +73,11 @@ const ForgotPass = () => {
         <img className="image" src={twitterimg} alt="twitterimage" />
       </div>
       <div className="form-container">
-      <TwitterIcon style={{ color: "skyblue" }} />
+        <TwitterIcon style={{ color: "skyblue" }} />
         <h2 className="heading">Forgot Password</h2>
+        <p className="warning">
+          Note: You can reset your password only Once a day!!!
+        </p>
         {!otpSent ? (
           <form onSubmit={handleSubmit}>
             <input
@@ -76,10 +88,16 @@ const ForgotPass = () => {
               onChange={(e) => setEmailOrPhone(e.target.value)}
               required
             />
-            <button type="submit" className="btn">Submit</button>
-            <button type="button" className="btn" onClick={() => navigate("/login")}>
-            Back to Login
-          </button>
+            <button type="submit" className="btn">
+              Submit
+            </button>
+            <button
+              type="button"
+              className="btn"
+              onClick={() => navigate("/login")}
+            >
+              Back to Login
+            </button>
           </form>
         ) : (
           <form onSubmit={handleVerifyOtp}>
@@ -91,12 +109,19 @@ const ForgotPass = () => {
               onChange={(e) => setOtp(e.target.value)}
               required
             />
-            <button className="btn" type="submit">Verify OTP</button>
-            <button type="button" className="btn" onClick={() => navigate("/login")}>
-            Back to Login
-          </button>
+            <button className="btn" type="submit">
+              Verify OTP
+            </button>
+            <button
+              type="button"
+              className="btn"
+              onClick={() => navigate("/login")}
+            >
+              Back to Login
+            </button>
           </form>
         )}
+        {loading && <p className="loading">Loading...Server is slow!</p>}
         {message && <p className="msg">{message}!!</p>}
       </div>
     </div>
